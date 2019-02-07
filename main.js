@@ -187,14 +187,14 @@ if (canvas.getContext) {
 
   let timeoutId;
 
-  function doTick() {
+  function doTick(context, board) {
     board.tick();
     board.print(context);
     document.getElementById("generation").value = board.generation;
 
     const delay = document.getElementById("delay").value;
 
-    timeoutId = window.setTimeout(doTick, delay);
+    timeoutId = window.setTimeout(doTick, delay, context, board);
   }
 
   function stopTick() {
@@ -210,7 +210,7 @@ if (canvas.getContext) {
       running = false;
       toggle.value = "Start";
     } else {
-      doTick();
+      doTick(context, board);
       running = true;
       toggle.value = "Stop";
     }
