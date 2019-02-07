@@ -10,3 +10,12 @@ body {
 #game {
   padding-top: 15px;
 }
+
+#options label {
+  padding-left: 10px;
+}
+
+#options input {
+  margin-left: 5px;
+  margin-right: 5px;
+}

@@ -14,9 +14,7 @@
       <a href="https://github.com/bradhanson/gameoflife">GitHub</a>
     </p>
 
-    <form>
-      <!-- <input type="button" value="Start" /> -->
-
+    <form id="options">
       <label for="delay">Delay</label
       ><input
         type="range"
@@ -28,6 +26,11 @@
         list="tickmarks"
         step="100"
       />
+
+      <label for="generation">Generation</label>
+      <input type="text" id="generation" size="5" required disabled value="0" />
+
+      <input type="button" id="toggle" value="Start" />
 
       <datalist id="tickmarks">
         <option value="0" label="0ms"> </option>
@@ -54,8 +57,6 @@
         <input type="number" id="size" required />
 
         <input type="button" value="Resize" />
-
-        <input type="number" id="generation" required disabled value="0" />
       </div>
     </form>
 
