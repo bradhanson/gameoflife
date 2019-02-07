@@ -30,6 +30,7 @@ Board.prototype.print = function(context) {
   // draw border
   context.strokeRect(0, 0, context.canvas.width, context.canvas.height);
 
+  // draw cells
   for (let y = 0; y < this.height; y++) {
     for (let x = 0; x < this.width; x++) {
       if (this.board[y][x] === 1) {
@@ -125,20 +126,19 @@ Board.prototype.tick = function() {
       const liveNeighbors = this.getLiveNeighbors(x, y);
 
       if (this.board[y][x] === 1) {
-        // alive
         if (liveNeighbors < 2) {
-          // dies
+          // Any live cell with fewer than two live neighbors dies, as if by underpopulation.
           newBoard.kill(x, y);
         } else if (liveNeighbors === 2 || liveNeighbors === 3) {
-          // lives
+          // Any live cell with two or three live neighbors lives on to the next generation.
           newBoard.spawn(x, y);
         } else {
-          // dies
+          // Any live cell with more than three live neighbors dies, as if by overpopulation.
           newBoard.kill(x, y);
         }
       } else {
-        // dead
         if (liveNeighbors === 3) {
+          // Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
           newBoard.spawn(x, y);
         }
       }
@@ -170,7 +170,7 @@ if (canvas.getContext) {
 
   const board = new Board(70, 70, 8);
 
-  // seed
+  // seed randomly
   for (let y = 0; y < board.height; y++) {
     for (let x = 0; x < board.width; x++) {
       const num = Math.random();
@@ -180,39 +180,36 @@ if (canvas.getContext) {
     }
   }
 
+  // initial draw
   board.print(context);
 
-  //window.setTimeout(doTick, 100);
-  //doTick();
-
   let timeoutId;
-
-  function doTick(context, board) {
-    board.tick();
-    board.print(context);
-    document.getElementById("generation").value = board.generation;
-
-    const delay = document.getElementById("delay").value;
-
-    timeoutId = window.setTimeout(doTick, delay, context, board);
-  }
-
-  function stopTick() {
-    window.clearTimeout(timeoutId);
-  }
-
   let running = false;
 
   const toggle = document.getElementById("toggle");
   toggle.addEventListener("click", event => {
     if (running) {
-      stopTick();
+      stopTicking();
       running = false;
       toggle.value = "Start";
     } else {
-      doTick(context, board);
+      startTicking(context, board);
       running = true;
       toggle.value = "Stop";
     }
   });
+}
+
+function startTicking(context, board) {
+  board.tick();
+  board.print(context);
+  document.getElementById("generation").value = board.generation;
+
+  const delay = document.getElementById("delay").value;
+
+  timeoutId = window.setTimeout(startTicking, delay, context, board);
+}
+
+function stopTicking() {
+  window.clearTimeout(timeoutId);
 }
