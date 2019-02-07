@@ -2,6 +2,7 @@ function Board(width, height, pieceSize) {
   this.width = width;
   this.height = height;
   this.pieceSize = pieceSize; // in pixels
+  this.generation = 0;
   this.board = [];
 
   // Initialize 2d board to all zeros
@@ -23,8 +24,8 @@ Board.prototype.kill = function(x, y) {
 };
 
 Board.prototype.print = function(context) {
-  context.canvas.width = this.width * this.pieceSize;
-  context.canvas.height = this.height * this.pieceSize;
+  context.canvas.width = this.width * this.pieceSize + 3;
+  context.canvas.height = this.height * this.pieceSize + 3;
 
   // draw border
   context.strokeRect(0, 0, context.canvas.width, context.canvas.height);
@@ -33,8 +34,8 @@ Board.prototype.print = function(context) {
     for (let x = 0; x < this.width; x++) {
       if (this.board[y][x] === 1) {
         context.fillRect(
-          x * this.pieceSize,
-          y * this.pieceSize,
+          x * this.pieceSize + 2,
+          y * this.pieceSize + 2,
           this.pieceSize - 1,
           this.pieceSize - 1
         );
@@ -145,6 +146,7 @@ Board.prototype.tick = function() {
   }
 
   this.board = newBoard.board;
+  this.generation++;
 };
 
 Board.prototype.clone = function() {
@@ -166,13 +168,13 @@ const canvas = document.getElementById("game");
 if (canvas.getContext) {
   const context = canvas.getContext("2d");
 
-  const board = new Board(50, 50, 10);
+  const board = new Board(70, 70, 8);
 
   // seed
   for (let y = 0; y < board.height; y++) {
     for (let x = 0; x < board.width; x++) {
       const num = Math.random();
-      if (num < 0.1) {
+      if (num < 0.4) {
         board.spawn(y, x);
       }
     }
@@ -180,8 +182,16 @@ if (canvas.getContext) {
 
   board.print(context);
 
-  window.setInterval(() => {
+  //window.setTimeout(doTick, 100);
+  doTick();
+
+  function doTick() {
     board.tick();
     board.print(context);
-  }, 300);
+    document.getElementById("generation").value = board.generation;
+
+    const delay = document.getElementById("delay").value;
+
+    window.setTimeout(doTick, delay);
+  }
 }

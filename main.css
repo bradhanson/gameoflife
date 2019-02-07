@@ -1,0 +1,12 @@
+body {
+  text-align: center;
+  font-family: Helvetica;
+}
+
+#advanced-settings {
+  display: none;
+}
+
+#game {
+  padding-top: 15px;
+}
