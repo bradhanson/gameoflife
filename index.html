@@ -4,59 +4,73 @@
     <meta charset="utf-8" />
     <title>Conway's Game of Life</title>
 
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5"
+    />
+
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <h1>Conway's Game of Life</h1>
+    <div id="foo">
+      <h1>Conway's Game of Life</h1>
 
-    <p>Implemented in vanilla HTML5 and javascript.</p>
+      <p>Implemented in vanilla HTML5 and javascript.</p>
 
-    <form id="options">
-      <label for="delay">Delay</label>
-      <input
-        type="range"
-        id="delay"
-        name="delay"
-        min="0"
-        max="1000"
-        value="300"
-        list="tickmarks"
-        step="100"
-      />
-      <datalist id="tickmarks">
-        <option value="0" label="0ms"> </option>
-        <option value="100"> </option>
-        <option value="200"> </option>
-        <option value="300"> </option>
-        <option value="400"> </option>
-        <option value="500" label="500ms"> </option>
-        <option value="600"> </option>
-        <option value="700"> </option>
-        <option value="800"> </option>
-        <option value="900"> </option>
-        <option value="1000" label="1000ms"> </option>
-      </datalist>
+      <form id="options">
+        <label for="delay">Delay</label>
+        <input
+          type="range"
+          id="delay"
+          name="delay"
+          min="0"
+          max="1000"
+          value="300"
+          list="tickmarks"
+          step="100"
+        />
+        <datalist id="tickmarks">
+          <option value="0" label="0ms"> </option>
+          <option value="100"> </option>
+          <option value="200"> </option>
+          <option value="300"> </option>
+          <option value="400"> </option>
+          <option value="500" label="500ms"> </option>
+          <option value="600"> </option>
+          <option value="700"> </option>
+          <option value="800"> </option>
+          <option value="900"> </option>
+          <option value="1000" label="1000ms"> </option>
+        </datalist>
 
-      <label for="generation">Generation</label>
-      <input type="text" id="generation" size="5" required disabled value="0" />
+        <label for="generation">Generation</label>
+        <input
+          type="text"
+          id="generation"
+          size="5"
+          required
+          disabled
+          value="0"
+        />
 
-      <input type="button" id="toggle" value="Start" />
+        <input type="button" id="toggle" value="Start" />
 
-      <div id="advanced-settings">
-        <label for="columns">Columns</label>
-        <input type="number" id="columns" required />
+        <div id="advanced-settings">
+          <label for="columns">Columns</label>
+          <input type="number" id="columns" required />
 
-        <label for="rows">Rows</label>
-        <input type="number" id="rows" required />
+          <label for="rows">Rows</label>
+          <input type="number" id="rows" required />
 
-        <label for="size">Cell Size (in pixels)</label>
-        <input type="number" id="size" required />
+          <label for="size">Cell Size (in pixels)</label>
+          <input type="number" id="size" required />
 
-        <input type="button" value="Resize" />
-      </div>
-    </form>
+          <input type="button" value="Resize" />
+        </div>
+      </form>
 
-    <canvas id="game">HTML5 canvas not supported.</canvas>
+      <canvas id="game">HTML5 canvas not supported.</canvas>
+    </div>
 
     <footer>
       <a href="https://github.com/bradhanson/gameoflife"
