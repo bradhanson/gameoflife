@@ -3,3 +3,6 @@
 Implemented in vanilla HTML5 and javascript.
 
 https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+
+View it here:
+https://bradhanson.github.io/gameoflife/
