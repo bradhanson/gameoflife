@@ -11,6 +11,10 @@ body {
   padding-top: 15px;
 }
 
+#options {
+  padding-top: 20px;
+}
+
 #options label {
   padding-left: 10px;
 }
@@ -18,4 +22,8 @@ body {
 #options input {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+footer {
+  padding: 20px;
 }
